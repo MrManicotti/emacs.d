@@ -1,10 +1,16 @@
 (require 'package)
-
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 ;; Download the ELPA archive description if needed.
 ;; This informs Emacs about the latest versions of all packages, and
 ;; makes them available for download.
 (when (not package-archive-contents)
   (package-refresh-contents))
+
+;; Set package priorities
+(setq package-archive-priorities
+      '(("nongnu" . 20)
+        ("gnu" . 10)
+        ("melpa" . 0)))
 
 ;; The packages you want installed. You can also install these
 ;; manually with M-x package-install
@@ -19,6 +25,15 @@
 
     ;; autocomplete
     helm
+    
+    ;; Clojure Repl Integration
+    cider
+
+    ;; lisp editing
+    paredit
+
+    ;; Clojure Mode
+    clojure-mode
    ))
 
 (dolist (p my-packages)
@@ -39,6 +54,8 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    '("cd4d1a0656fee24dc062b997f54d6f9b7da8f6dc8053ac858f15820f9a04a679" default))
+ '(org-agenda-files
+   '("~/Projects/atlantis/notes.org" "/Users/chrismoore/Projects/atlantis/standup.org"))
  '(package-selected-packages '(gruvbox-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
