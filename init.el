@@ -29,7 +29,6 @@
 (straight-use-package 'treemacs-magit)
 (straight-use-package 'tree-sitter)
 (straight-use-package 'tree-sitter-langs)
-(straight-use-package 'lsp-pyright)
 
 ;; Helm
 (global-set-key (kbd "M-x") #'helm-M-x)
