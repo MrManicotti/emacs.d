@@ -1,6 +1,6 @@
 ;;; -*- lisp-data -*-
-(("~/.emacs.d/")
- ("~/Projects/atlantis-infra/")
+(("~/Projects/atlantis-infra/")
+ ("~/.emacs.d/")
  ("~/Projects/mercury/")
  ("~/Projects/dlr-scripts/")
  ("~/Projects/hermes/")

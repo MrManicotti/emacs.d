@@ -48,13 +48,25 @@
 
 ;; Elixir Configuration
 (use-package lsp-mode
-    :commands lsp
-    :straight t
-    :diminish lsp-mode
-    :hook
-    (elixir-mode . lsp)
-    :init
-    (add-to-list 'exec-path "~/languages_servers/elixir-ls-1.13"))
+  :commands lsp
+  :straight t
+  :diminish lsp-mode
+  :hook
+  (elixir-mode . lsp)
+  :init
+  (add-to-list 'exec-path "~/languages_servers/elixir-ls-1.13"))
+
+;; Python Configuration
+(use-package elpy
+  :straight t
+  :init
+  (elpy-enable))
+
+(use-package lsp-pyright
+  :straight t
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))  ; or lsp-deferred
 
 ;; Treesitter
 (require 'tree-sitter)
