@@ -29,6 +29,7 @@
 (straight-use-package 'treemacs-magit)
 (straight-use-package 'tree-sitter)
 (straight-use-package 'tree-sitter-langs)
+(straight-use-package 'lsp-pyright)
 
 ;; Helm
 (global-set-key (kbd "M-x") #'helm-M-x)
@@ -97,8 +98,8 @@
           treemacs-find-workspace-method           'find-for-file-or-pick-first
           treemacs-git-command-pipe                ""
           treemacs-goto-tag-strategy               'refetch-index
-          treemacs-header-scroll-indicators        '(nil . "^^^^^^")'
-          treemacs-hide-dot-git-directory          t
+          treemacs-header-scroll-indicators        '(nil . "^^^^^^")
+	  treemacs-hide-dot-git-directory          t
           treemacs-indentation                     2
           treemacs-indentation-string              " "
           treemacs-is-never-other-window           nil
