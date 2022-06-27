@@ -50,6 +50,15 @@
     ;; Clojure
     cider
     clojure-mode
+
+    ;; Treemacs
+    treemacs
+    treemacs-icons-dired
+    treemacs-magit
+
+    ;; Treesitter
+    tree-sitter
+    tree-sitter-langs
    ))
 
 (dolist (p my-packages)
@@ -80,6 +89,12 @@
     (elixir-mode . lsp)
     :init
     (add-to-list 'exec-path "~/languages_servers/elixir-ls-1.13"))
+
+;; Treesitter
+(require 'tree-sitter)
+(require 'tree-sitter-langs)
+(global-tree-sitter-mode)
+(add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
 
 ;; Treemacs
 (use-package treemacs
