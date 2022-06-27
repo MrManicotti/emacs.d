@@ -1,70 +1,36 @@
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-;; Download the ELPA archive description if needed.
-;; This informs Emacs about the latest versions of all packages, and
-;; makes them available for download.
-(when (not package-archive-contents)
-  (package-refresh-contents))
+;; straight bootstrap
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-;; Set package priorities
-(setq package-archive-priorities
-      '(("nongnu" . 15)
-        ("gnu" . 10)
-        ("melpa" . 20)))
+;; Installs
+(straight-use-package 'use-package)
+(straight-use-package 'lsp-mode)
+(straight-use-package 'magit)
+(straight-use-package 'helm)
+(straight-use-package 'paredit)
+(straight-use-package 'elixir-mode)
+(straight-use-package 'sly)
+(straight-use-package 'which-key)
+(straight-use-package 'cider)
+(straight-use-package 'clojure-mode)
+(straight-use-package 'solarized-theme)
+(straight-use-package 'treemacs)
+(straight-use-package 'treemacs-icons-dired)
+(straight-use-package 'treemacs-magit)
+(straight-use-package 'tree-sitter)
+(straight-use-package 'tree-sitter-langs)
 
-;; The packages you want installed. You can also install these
-;; manually with M-x package-install
-;; Add in your own as you wish:
-(defvar my-packages
-  '(
-    ;;
-    use-package
-    
-    ;; lsp mode
-    lsp-mode
-
-    ;; complete
-    company
-    
-    ;; git integration
-    magit
-    
-    ;; autocomplete
-    helm
-
-    ;; lisp editing
-    paredit
-
-    ;; Elixir
-    elixir-mode
-
-    ;; Superior Lisp Interaction Mode
-    sly
-
-    ;; solarized
-    solarized-theme
-
-    ;; support
-    which-key
-
-    ;; Clojure
-    cider
-    clojure-mode
-
-    ;; Treemacs
-    treemacs
-    treemacs-icons-dired
-    treemacs-magit
-
-    ;; Treesitter
-    tree-sitter
-    tree-sitter-langs
-   ))
-
-(dolist (p my-packages)
-  (when (not (package-installed-p p))
-    (package-install p)))
-
+;; Helm
 (global-set-key (kbd "M-x") #'helm-M-x)
 (global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
 (global-set-key (kbd "C-x C-f") #'helm-find-files)
@@ -81,9 +47,9 @@
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
 
 ;; Elixir Configuration
-  (use-package lsp-mode
+(use-package lsp-mode
     :commands lsp
-    :ensure t
+    :straight t
     :diminish lsp-mode
     :hook
     (elixir-mode . lsp)
@@ -98,7 +64,7 @@
 
 ;; Treemacs
 (use-package treemacs
-  :ensure t
+  :straight t
   :defer t
   :init
   (with-eval-after-load 'winum
@@ -187,29 +153,14 @@
 
 (use-package treemacs-icons-dired
   :hook (dired-mode . treemacs-icons-dired-enable-once)
-  :ensure t)
+  :straight t)
 
 (use-package treemacs-magit
   :after (treemacs magit)
-  :ensure t)
+  :straight t)
 
 ;; Org Agenda Configuration
 (setq org-agenda-files '("~/Projects/atlantis-minutes"))
 
+;; Theme
 (load-theme 'solarized-dark t)
-
-;; MISC Configuration
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("cd4d1a0656fee24dc062b997f54d6f9b7da8f6dc8053ac858f15820f9a04a679" default))
- '(package-selected-packages '(gruvbox-theme)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

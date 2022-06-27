@@ -1,0 +1,1 @@
+/Users/chrismoore/.emacs.d/straight/repos/solarized-emacs/solarized-faces.el

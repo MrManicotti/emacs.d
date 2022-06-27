@@ -1,0 +1,1 @@
+/Users/chrismoore/.emacs.d/straight/repos/emacs-elixir/elixir-mode.el
