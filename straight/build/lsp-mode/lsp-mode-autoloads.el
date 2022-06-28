@@ -565,7 +565,8 @@ Entry point that defers server startup until buffer is visible.
 This avoids overloading the server with many files when starting Emacs." nil nil)
 
 (autoload 'lsp-start-plain "lsp-mode" "\
-Start `lsp-mode' using mininal configuration using the latest `melpa' version of the packages.
+Start `lsp-mode' using mininal configuration using the latest `melpa' version
+of the packages.
 
 In case the major-mode that you are using for " t nil)
 

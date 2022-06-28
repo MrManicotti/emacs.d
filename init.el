@@ -12,41 +12,9 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-;; Installs
+;; Configuration
 (straight-use-package 'use-package)
-(straight-use-package 'lsp-mode)
-(straight-use-package 'magit)
-(straight-use-package 'helm)
-(straight-use-package 'paredit)
-(straight-use-package 'elixir-mode)
-(straight-use-package 'sly)
-(straight-use-package 'which-key)
-(straight-use-package 'cider)
-(straight-use-package 'clojure-mode)
-(straight-use-package 'solarized-theme)
-(straight-use-package 'treemacs)
-(straight-use-package 'treemacs-icons-dired)
-(straight-use-package 'treemacs-magit)
-(straight-use-package 'tree-sitter)
-(straight-use-package 'tree-sitter-langs)
 
-;; Helm
-(global-set-key (kbd "M-x") #'helm-M-x)
-(global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
-(global-set-key (kbd "C-x C-f") #'helm-find-files)
-
-(helm-mode 1)
-
-;; LSP Mode Config
-(add-to-list 'load-path
-              "~/.emacs.d/plugins/yasnippet")
-(require 'yasnippet)
-(yas-global-mode 1)
-
-;; Common Lisp Configuration
-(setq inferior-lisp-program "/usr/local/bin/sbcl")
-
-;; Elixir Configuration
 (use-package lsp-mode
   :commands lsp
   :straight t
@@ -56,25 +24,35 @@
   :init
   (add-to-list 'exec-path "~/languages_servers/elixir-ls-1.13"))
 
-;; Python Configuration
-(use-package elpy
+(use-package magit
+  :straight t)
+
+(use-package helm
+  :straight t
+  :bind (("M-x" . helm-M-x)
+	 ("C-x C-f" . helm-find-files))
+  :init
+  (helm-mode 1))
+
+(use-package paredit
+  :straight t)
+
+(use-package elixir-mode
+  :straight t)
+
+(use-package sly
   :straight t
   :init
-  (elpy-enable))
+  (setq inferior-lisp-program "/usr/local/bin/sbcl"))
 
-(use-package lsp-pyright
+(use-package which-key
+  :straight t)
+
+(use-package solarized-theme
   :straight t
-  :hook (python-mode . (lambda ()
-                          (require 'lsp-pyright)
-                          (lsp))))  ; or lsp-deferred
+  :config
+  (load-theme 'solarized-dark t))
 
-;; Treesitter
-(require 'tree-sitter)
-(require 'tree-sitter-langs)
-(global-tree-sitter-mode)
-(add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
-
-;; Treemacs
 (use-package treemacs
   :straight t
   :defer t
@@ -171,8 +149,42 @@
   :after (treemacs magit)
   :straight t)
 
-;; Org Agenda Configuration
-(setq org-agenda-files '("~/Projects/atlantis-minutes"))
+(use-package treemacs-icons-dired
+  :straight t)
 
-;; Theme
-(load-theme 'solarized-dark t)
+(use-package treemacs-magit
+  :straight t)
+
+(use-package tree-sitter-langs
+  :straight t)
+
+(use-package tree-sitter
+  :straight t
+  :init
+  (require 'tree-sitter)
+  (require 'tree-sitter-langs)
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+(use-package elpy
+  :straight t
+  :init
+  (elpy-enable))
+
+(use-package lsp-pyright
+  :straight t
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))  ; or lsp-deferred
+
+
+;; LSP Mode Config
+(add-to-list 'load-path
+              "~/.emacs.d/plugins/yasnippet")
+(require 'yasnippet)
+(yas-global-mode 1)
+
+;; Org Agenda Configuration
+(setq org-agenda-files
+      '("~/Projects/atlantis-minutes"
+	"~/Projects/atlantis"))
