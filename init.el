@@ -24,6 +24,11 @@
   :init
   (add-to-list 'exec-path "~/languages_servers/elixir-ls-1.13"))
 
+(use-package company
+  :straight t
+  :init
+  (global-company-mode))
+
 (use-package magit
   :straight t)
 
