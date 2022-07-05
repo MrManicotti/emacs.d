@@ -15,12 +15,18 @@
 ;; Configuration
 (straight-use-package 'use-package)
 
+(use-package terraform-mode
+  :straight t)
+(use-package elixir-mode
+  :straight t)
+
 (use-package lsp-mode
   :commands lsp
   :straight t
   :diminish lsp-mode
   :hook
   (elixir-mode . lsp)
+  (terraform-mode . lsp)
   :init
   (add-to-list 'exec-path "~/languages_servers/elixir-ls-1.13"))
 
@@ -42,9 +48,6 @@
 (use-package paredit
   :straight t)
 
-(use-package elixir-mode
-  :straight t)
-
 (use-package sly
   :straight t
   :init
@@ -52,11 +55,6 @@
 
 (use-package which-key
   :straight t)
-
-(use-package solarized-theme
-  :straight t
-  :config
-  (load-theme 'solarized-dark t))
 
 (use-package treemacs
   :straight t
@@ -182,6 +180,8 @@
                           (require 'lsp-pyright)
                           (lsp))))  ; or lsp-deferred
 
+
+(load-theme 'modus-vivendi)
 
 ;; LSP Mode Config
 (add-to-list 'load-path

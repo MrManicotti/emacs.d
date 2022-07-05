@@ -1,10 +1,10 @@
 ;;; -*- lisp-data -*-
 (("~/.emacs.d/")
+ ("~/Projects/mercury/")
  ("~/Projects/hermes/")
  ("~/Projects/atlantis-infra/")
  ("~/Projects/atlas/")
  ("~/Projects/dlr-scripts/")
- ("~/Projects/mercury/")
  ("~/Projects/moneta/")
  ("~/Projects/atlantis-minutes/")
  ("~/Projects/atlas-api-collection/")
