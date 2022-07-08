@@ -17,6 +17,7 @@
 
 (use-package terraform-mode
   :straight t)
+
 (use-package elixir-mode
   :straight t)
 
@@ -27,6 +28,7 @@
   :hook
   (elixir-mode . lsp)
   (terraform-mode . lsp)
+  (javascript-mode . lsp)
   :init
   (add-to-list 'exec-path "~/languages_servers/elixir-ls-1.13"))
 
@@ -35,15 +37,36 @@
   :init
   (global-company-mode))
 
+(use-package doom-modeline
+  :straight t
+  :init (doom-modeline-mode 1))
+
+(use-package all-the-icons
+  :straight t
+  :if (display-graphic-p))
+
 (use-package magit
   :straight t)
 
-(use-package helm
+(use-package counsel
   :straight t
-  :bind (("M-x" . helm-M-x)
-	 ("C-x C-f" . helm-find-files))
+  :bind (("C-s" . swiper-isearch)
+	 ("M-x" . counsel-M-x)
+	 ("C-x C-f" . counsel-find-file)
+	 ("M-y" . counsel-yank-pop)
+	 ("<f1> f" . counsel-describe-function)
+	 ("<f1> v" . counsel-describe-variable)
+	 ("<f1> l" . counsel-find-library)
+	 ("<f2> i" . counsel-info-lookup-symbol)
+	 ("<f2> u" . counsel-unicode-char)
+	 ("<f2> j" . counsel-set-variable)
+	 ("C-x b" . ivy-switch-buffer)
+	 ("C-c v" . ivy-push-view)
+	 ("C-c V" . ivy-pop-view))
   :init
-  (helm-mode 1))
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
+  (ivy-mode 1))
 
 (use-package paredit
   :straight t)
@@ -148,11 +171,13 @@
   :hook (dired-mode . treemacs-icons-dired-enable-once)
   :straight t)
 
+(use-package treemacs-all-the-icons
+  :straight t
+  :config
+  (treemacs-load-theme "all-the-icons"))
+
 (use-package treemacs-magit
   :after (treemacs magit)
-  :straight t)
-
-(use-package treemacs-icons-dired
   :straight t)
 
 (use-package treemacs-magit
@@ -180,6 +205,13 @@
                           (require 'lsp-pyright)
                           (lsp))))  ; or lsp-deferred
 
+(use-package pyvenv
+  :straight t)
+
+;; Misc
+(setq js-indent-level 2)
+(setq-default indent-tabs-mode nil)
+(tool-bar-mode -1)
 
 (load-theme 'modus-vivendi)
 
