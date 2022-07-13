@@ -15,11 +15,25 @@
 ;; Configuration
 (straight-use-package 'use-package)
 
+(use-package projectile
+  :straight t
+  :init
+  (setq projectile-project-search-path '("~/Projects/"))
+  (projectile-mode +1)
+  :bind (:map projectile-mode-map
+              ("s-p" . projectile-command-map)
+              ("C-c p" . projectile-command-map)))
+
 (use-package terraform-mode
   :straight t)
 
 (use-package elixir-mode
   :straight t)
+
+(use-package python
+  :hook
+  (python-mode . (lambda ()
+                   (setq python-indent-def-block-scale 1))))
 
 (use-package lsp-mode
   :commands lsp
@@ -32,14 +46,23 @@
   :init
   (add-to-list 'exec-path "~/languages_servers/elixir-ls-1.13"))
 
+(use-package dap-mode
+  :straight t
+  :custom
+  (dap-auto-configure-features '(sessions locals controls tooltip))
+  (dap-python-debugger 'debugpy)
+  :config
+  (require 'dap-python))
+
 (use-package company
   :straight t
-  :init
+  :config
   (global-company-mode))
 
 (use-package doom-modeline
   :straight t
-  :init (doom-modeline-mode 1))
+  :config
+  (doom-modeline-mode 1))
 
 (use-package all-the-icons
   :straight t
@@ -48,25 +71,24 @@
 (use-package magit
   :straight t)
 
-(use-package counsel
+(use-package helm
   :straight t
-  :bind (("C-s" . swiper-isearch)
-	 ("M-x" . counsel-M-x)
-	 ("C-x C-f" . counsel-find-file)
-	 ("M-y" . counsel-yank-pop)
-	 ("<f1> f" . counsel-describe-function)
-	 ("<f1> v" . counsel-describe-variable)
-	 ("<f1> l" . counsel-find-library)
-	 ("<f2> i" . counsel-info-lookup-symbol)
-	 ("<f2> u" . counsel-unicode-char)
-	 ("<f2> j" . counsel-set-variable)
-	 ("C-x b" . ivy-switch-buffer)
-	 ("C-c v" . ivy-push-view)
-	 ("C-c V" . ivy-pop-view))
-  :init
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-count-format "(%d/%d) ")
-  (ivy-mode 1))
+  :config
+  (global-set-key (kbd "M-x") #'helm-M-x)
+  (global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
+  (global-set-key (kbd "C-x C-f") #'helm-find-files)
+  (helm-mode 1))
+
+(use-package helm-projectile
+  :straight t
+  :config
+  (helm-projectile-on))
+
+(use-package ag
+  :straight t)
+
+(use-package helm-ag
+  :straight t)
 
 (use-package paredit
   :straight t)
@@ -196,7 +218,7 @@
 
 (use-package elpy
   :straight t
-  :init
+  :config
   (elpy-enable))
 
 (use-package lsp-pyright
@@ -207,6 +229,22 @@
 
 (use-package pyvenv
   :straight t)
+
+(use-package org-roam
+  :straight t
+  :custom
+  (org-roam-directory (file-truename "~/roam"))
+  :bind
+  (("C-c n f" . org-roam-node-find)
+   ("C-c n r" . org-roam-node-random)		    
+   (:map org-mode-map
+         (("C-c n i" . org-roam-node-insert)
+          ("C-c n o" . org-id-get-create)
+          ("C-c n t" . org-roam-tag-add)
+          ("C-c n a" . org-roam-alias-add)
+          ("C-c n l" . org-roam-buffer-toggle))))
+  :config
+  (org-roam-db-autosync-mode))
 
 ;; Misc
 (setq js-indent-level 2)
