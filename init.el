@@ -46,14 +46,6 @@
   :init
   (add-to-list 'exec-path "~/languages_servers/elixir-ls-1.13"))
 
-(use-package dap-mode
-  :straight t
-  :custom
-  (dap-auto-configure-features '(sessions locals controls tooltip))
-  (dap-python-debugger 'debugpy)
-  :config
-  (require 'dap-python))
-
 (use-package company
   :straight t
   :config
