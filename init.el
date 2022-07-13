@@ -227,7 +227,9 @@
   :custom
   (org-roam-directory (file-truename "~/roam"))
   :bind
-  (("C-c n f" . org-roam-node-find)
+  (("C-c n l" . org-roam-buffer-toggle)
+   ("C-c n f" . org-roam-node-find)
+   ("C-c n c" . org-roam-capture)
    ("C-c n r" . org-roam-node-random)		    
    (:map org-mode-map
          (("C-c n i" . org-roam-node-insert)
@@ -236,6 +238,7 @@
           ("C-c n a" . org-roam-alias-add)
           ("C-c n l" . org-roam-buffer-toggle))))
   :config
+  (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
   (org-roam-db-autosync-mode))
 
 ;; Misc
