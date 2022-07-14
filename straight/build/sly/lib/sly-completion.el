@@ -1,1 +1,0 @@
-/Users/chrismoore/.emacs.d/straight/repos/sly/lib/sly-completion.el

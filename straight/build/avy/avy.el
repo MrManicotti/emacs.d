@@ -1,1 +1,0 @@
-/Users/chrismoore/.emacs.d/straight/repos/avy/avy.el
