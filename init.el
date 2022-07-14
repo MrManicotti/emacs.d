@@ -222,6 +222,9 @@
 (use-package pyvenv
   :straight t)
 
+(use-package org
+  :straight t)
+
 (use-package org-roam
   :straight t
   :custom

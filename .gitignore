@@ -3,3 +3,9 @@ tutorial
 .cache
 .lsp-session-v1
 auto-save-list
+projects
+transient/
+plugins/
+straight/build
+straight/repos
+straight/build-cache.el
