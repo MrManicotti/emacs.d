@@ -24,6 +24,12 @@
               ("s-p" . projectile-command-map)
               ("C-c p" . projectile-command-map)))
 
+(use-package plantuml-mode
+  :straight t
+  :custom
+  (plantuml-jar-path "~/languages_servers/plantuml-1.2022.6.jar")
+  (plantuml-default-exec-mode 'jar))
+
 (use-package terraform-mode
   :straight t)
 
@@ -249,7 +255,7 @@
 (setq-default indent-tabs-mode nil)
 (tool-bar-mode -1)
 
-(load-theme 'modus-vivendi)
+(load-theme 'modus-operandi)
 
 ;; LSP Mode Config
 (add-to-list 'load-path
