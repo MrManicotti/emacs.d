@@ -33,6 +33,7 @@
  ("org-roam" . "c3867619147175faf89ed8f3e90a1e67a4fd9655")
  ("paredit" . "8330a41e8188fe18d3fa805bb9aa529f015318e8")
  ("pfuture" . "f9e67bd7edbd5b4e033efd82c0acc4a85ff860a8")
+ ("plantuml-mode" . "ea45a13707abd2a70df183f1aec6447197fc9ccc")
  ("popup-el" . "c65905aa1a3ac32d1dbc8c1060605621e6143f80")
  ("posframe" . "0d23bc5f7cfac00277d83ae7ba52c48685bcbc68")
  ("projectile" . "00fce5a62cab56873c37629bef653bb2a1e4a4c1")

@@ -50,7 +50,13 @@
   (terraform-mode . lsp)
   (javascript-mode . lsp)
   :init
-  (add-to-list 'exec-path "~/languages_servers/elixir-ls-1.13"))
+  (add-to-list 'exec-path "~/languages_servers/elixir-ls-1.13")
+  :config
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\build\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\deps\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\terraform\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\venv\\'")
+  )
 
 (use-package company
   :straight t
