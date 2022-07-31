@@ -114,6 +114,11 @@
 (use-package which-key
   :straight t)
 
+(use-package dirvish
+  :straight t
+  :init
+  (dirvish-override-dired-mode))
+
 (use-package treemacs
   :straight t
   :defer t
