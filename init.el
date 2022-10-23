@@ -36,27 +36,14 @@
 (use-package elixir-mode
   :straight t)
 
+(use-package yaml-mode
+  :straight t
+  :mode ("\\.yml$" . yaml-mode))
+
 (use-package python
   :hook
   (python-mode . (lambda ()
                    (setq python-indent-def-block-scale 1))))
-
-(use-package lsp-mode
-  :commands lsp
-  :straight t
-  :diminish lsp-mode
-  :hook
-  (elixir-mode . lsp)
-  (terraform-mode . lsp)
-  (javascript-mode . lsp)
-  :init
-  (add-to-list 'exec-path "~/languages_servers/elixir-ls-1.13")
-  :config
-  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\build\\'")
-  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\deps\\'")
-  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\terraform\\'")
-  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\venv\\'")
-  )
 
 (use-package avy
   :straight t
@@ -109,7 +96,9 @@
 (use-package dirvish
   :straight t
   :init
-  (dirvish-override-dired-mode))
+  (dirvish-override-dired-mode)
+  :config
+  (setq dirvish-attributes '(all-the-icons)))
 
 (use-package tree-sitter-langs
   :straight t)
@@ -126,12 +115,6 @@
   :straight t
   :config
   (elpy-enable))
-
-(use-package lsp-pyright
-  :straight t
-  :hook (python-mode . (lambda ()
-                          (require 'lsp-pyright)
-                          (lsp))))  ; or lsp-deferred
 
 (use-package org
   :straight t)
@@ -155,6 +138,12 @@
   (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
   (org-roam-db-autosync-mode))
 
+(use-package drag-stuff
+  :straight t
+  :config
+  (drag-stuff-global-mode 1)
+  (drag-stuff-define-keys))
+
 ;; Misc
 (setq js-indent-level 2)
 (setq-default indent-tabs-mode nil)
@@ -162,13 +151,19 @@
 
 (load-theme 'modus-operandi)
 
-;; LSP Mode Config
-(add-to-list 'load-path
-              "~/.emacs.d/plugins/yasnippet")
-(require 'yasnippet)
-(yas-global-mode 1)
-
 ;; Org Agenda Configuration
 (setq org-agenda-files
       '("~/Projects/atlantis-minutes"
 	"~/Projects/atlantis"))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(warning-suppress-log-types '((comp))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
